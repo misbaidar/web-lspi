@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { id as indonesia } from 'date-fns/locale';
 import { motion } from 'framer-motion';
-import { Eye, Target, Calendar, ArrowRight } from 'lucide-react';
+import { Eye, Target, Calendar, ArrowRight, User } from 'lucide-react';
 
 import HeroSection from '../components/HeroSection';
 import InstagramWidget from '../components/InstagramWidget';
@@ -171,35 +171,55 @@ const Home = () => {
                 transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
               >
                 {/* Thumbnail */}
-                <Link to={`/artikel/${article.slug}`} className="block h-48 overflow-hidden relative">
-                   <img 
+                <div className="h-48 overflow-hidden relative group">
+                  <img 
                     src={article.thumbnail} 
                     alt={article.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    onError={(e) => (e.currentTarget.src = "https://via.placeholder.com/600x400?text=No+Image")}
                   />
-                  <div className="absolute top-4 left-4 bg-lspi-main text-white text-[10px] font-bold px-2 py-1 rounded">
-                    {article.category}
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-lspi-main text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                      {article.category}
+                    </span>
                   </div>
-                </Link>
+                </div>
 
                 {/* Content */}
                 <div className="p-6 flex flex-col grow">
-                  <div className="flex items-center text-[10px] text-gray-400 mb-2">
-                    <Calendar className="w-3 h-3 mr-1" />
-                    {article.createdAt ? format(article.createdAt.toDate(), 'dd MMM yyyy', { locale: indonesia }) : '-'}
+                  {/* Meta */}
+                  <div className="flex items-center text-xs text-gray-500 mb-3 space-x-4">
+                    <div className="flex items-center">
+                      <Calendar className="w-3 h-3 mr-1" />
+                      {article.createdAt 
+                        ? format(article.createdAt.toDate(), 'd MMM yyyy', { locale: indonesia }) 
+                        : '-'}
+                    </div>
+                    <div className="flex items-center">
+                      <User className="w-3 h-3 mr-1" />
+                      <span className="truncate max-w-[100px]">{article.author}</span>
+                    </div>
                   </div>
-                  
-                  <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 hover:text-lspi-main">
-                    <Link to={`/artikel/${article.slug}`}>{article.title}</Link>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-lspi-main transition-colors">
+                    <Link to={`/artikel/${article.slug}`}>
+                      {article.title}
+                    </Link>
                   </h3>
-                  
-                  <p className="text-gray-500 text-xs line-clamp-3 mb-4 grow">
+
+                  {/* Excerpt */}
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3 grow">
                     {article.excerpt}
                   </p>
 
-                  <Link to={`/artikel/${article.slug}`} className="text-lspi-main text-xs font-bold flex items-center group/btn">
+                  {/* Read More */}
+                  <Link 
+                    to={`/artikel/${article.slug}`} 
+                    className="inline-flex items-center text-lspi-main font-semibold text-sm hover:underline mt-auto group"
+                  >
                     Baca Selengkapnya 
-                    <ArrowRight className="ml-1 w-3 h-3 transition-transform group-hover/btn:translate-x-1" />
+                    <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </div>
               </motion.div>
