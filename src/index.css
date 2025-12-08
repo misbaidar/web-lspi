@@ -1,0 +1,99 @@
+/* src/index.css */
+
+/* 1. LOAD FONT */
+/* Menggunakan display=swap agar teks muncul lebih cepat (fallback) sebelum font selesai diunduh */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=block');
+
+/* 2. TAILWIND INITIALIZATION */
+@import "tailwindcss";
+
+/* 3. THEME CONFIGURATION (Tailwind v4) */
+@theme {
+  /* Definisi Warna LSPI */
+  --color-lspi-main: #004368; 
+  --color-lspi-dark: #002C46;
+  --color-lspi-light-accent: #C0D9E0; 
+
+  /* Mengatur Font Default Tailwind (font-sans) menjadi Quicksand */
+  --default-font-family: 'Quicksand', system-ui, -apple-system, sans-serif;
+   
+}
+
+/* 4. ROOT VARIABLES & GLOBAL SETTINGS */
+/* Ini yang Anda cari untuk kelengkapan standar CSS */
+:root {
+  /* Variabel referensi untuk penggunaan di luar utility Tailwind (jika perlu) */
+  --brand-primary: #004368;
+  --brand-dark: #002C46;
+  --brand-accent: #C0D9E0;
+
+  /* Jarak aman untuk Navbar Sticky (bisa dipakai di calc() padding-top halaman) */
+  --navbar-height: 7rem;
+}
+
+/* 5. BASE LAYER STYLES */
+/* Mengatur gaya dasar HTML tag */
+@layer base {
+  html {
+    /* Membuat scroll anchor link menjadi halus (smooth scrolling) */
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    /* Menerapkan font Quicksand secara global */
+    font-family: var(--default-font-family);
+    /* Warna latar default (sedikit abu agar tidak sakit mata) & warna teks standar */
+    @apply bg-gray-50 text-gray-800;
+    /* Mencegah x-scroll liar di mobile */
+    overflow-x: hidden; 
+  }
+  
+  /* Styling warna sorot teks (saat di-blok user) */
+  ::selection {
+    @apply bg-lspi-light-accent text-lspi-dark;
+  }
+}
+
+/* 6. UTILITY LAYER STYLES */
+/* Kelas bantuan tambahan */
+@layer utilities {
+  
+  /* Text Shadow: Berguna untuk teks putih di atas background transparan/gambar */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .text-shadow-md {
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  .text-shadow-none {
+    text-shadow: none;
+  }
+
+  /* Kustomisasi Scrollbar (Webkit: Chrome, Safari, Edge) */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-200;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-lspi-main/60 rounded-full hover:bg-lspi-main transition-colors;
+  }
+}
+
+/* Force bullet points and numbers to show */
+.wmde-markdown ul {
+  list-style-type: disc !important;
+  @apply my-4;
+}
+
+.wmde-markdown ol {
+  list-style-type: decimal !important;
+  @apply my-4;
+}
