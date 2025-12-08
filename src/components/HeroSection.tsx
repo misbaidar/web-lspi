@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 // URL gambar latar belakang (Ganti dengan path gambar LSPI yang relevan)
-const BACKGROUND_IMAGE = 'src/assets/photo_hero.jpg'; 
+import heroBgImage from '../assets/photo_hero.jpg';
 
 // Varian animasi untuk teks (agar muncul perlahan)
 const textVariants = {
@@ -19,7 +19,7 @@ const HeroSection = () => {
     // 1. Kontainer Utama: Atur tinggi dan gambar latar
     <div 
       className="relative h-[60vh] md:h-screen flex items-center justify-center bg-cover bg-top"
-      style={{ backgroundImage: `url(${BACKGROUND_IMAGE})` }}
+      style={{ backgroundImage: `url(${heroBgImage})` }}
     >
       
       {/* 2. Layer Transparan Biru (Overlay) */}
