@@ -1,14 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-// 👇 PASTE KONFIGURASI DARI FIREBASE CONSOLE DI SINI
 const firebaseConfig = {
-  apiKey: "AIzaSyBvvk-5g7KJx53I7xk9PJoM2dg_oGbqxio",
-  authDomain: "lspi-system.firebaseapp.com",
-  projectId: "lspi-system",
-  storageBucket: "lspi-system.firebasestorage.app",
-  messagingSenderId: "421390270894",
-  appId: "1:421390270894:web:2c3449d20971a15795c83f"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);
