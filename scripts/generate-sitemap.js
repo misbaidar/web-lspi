@@ -21,13 +21,26 @@ const db = getFirestore(app);
 const BASE_URL = 'https://lspiuinbdg.vercel.app'; // Ganti dengan domain publik Anda
 const PUBLIC_DIR = './public';
 
+function escapeXml(unsafe) {
+  return unsafe.replace(/[<>&"']/g, function (c) {
+    switch (c) {
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '&': return '&amp;';
+      case '"': return '&quot;';
+      case "'": return '&apos;';
+      default: return c;
+    }
+  });
+}
+
 async function generateSitemap() {
   console.log('Fetching articles from Firestore...');
   
   const querySnapshot = await getDocs(collection(db, "articles"));
   const articles = querySnapshot.docs
     .map(doc => doc.data())
-    .filter(a => a.status === 'Published'); // Hanya artikel terbit
+    .filter(a => a.status === 'Published');
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -42,7 +55,7 @@ async function generateSitemap() {
 
   ${articles.map(article => `
   <url>
-    <loc>${BASE_URL}/artikel/${article.slug}</loc>
+    <loc>${BASE_URL}/artikel/${escapeXml(article.slug)}</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <priority>0.6</priority>
   </url>`).join('')}
