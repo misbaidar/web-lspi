@@ -154,25 +154,6 @@ const ArticleDetail = () => {
           {/* --- KOLOM KANAN: SIDEBAR (STICKY) --- */}
           {/* Tambahkan 'lg:sticky lg:top-24' dan 'h-fit' agar sidebar diam saat scroll */}
           <aside className="lg:col-span-4 space-y-8 lg:sticky lg:top-24 h-fit">
-            
-            {/* 1. Search Widget */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-              <h3 className="text-lg font-bold text-lspi-dark mb-4">Cari Artikel</h3>
-              <form onSubmit={handleSearch} className="relative">
-                <input 
-                  type="text" 
-                  placeholder="Ketik kata kunci..." 
-                  className="w-full py-3 pl-4 pr-12 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-lspi-main/50 transition-all"
-                  value={keyword}
-                  onChange={(e) => setKeyword(e.target.value)}
-                />
-                <button type="submit" className="absolute right-2 top-2 p-1.5 bg-lspi-main text-white rounded-md hover:bg-lspi-dark transition-colors">
-                  <Search className="w-4 h-4" />
-                </button>
-              </form>
-            </div>
-            
-            {/* 3. Artikel Terbaru Widget */}
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
               <h3 className="text-lg font-bold text-lspi-dark mb-6 border-l-4 border-lspi-main pl-3">
                 Artikel Terbaru
@@ -208,8 +189,23 @@ const ArticleDetail = () => {
                 )}
               </div>
             </div>
+            
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+              <h3 className="text-lg font-bold text-lspi-dark mb-4">Cari Artikel</h3>
+              <form onSubmit={handleSearch} className="relative">
+                <input 
+                  type="text" 
+                  placeholder="Ketik kata kunci..." 
+                  className="w-full py-3 pl-4 pr-12 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-lspi-main/50 transition-all"
+                  value={keyword}
+                  onChange={(e) => setKeyword(e.target.value)}
+                />
+                <button type="submit" className="absolute right-2 top-2 p-1.5 bg-lspi-main text-white rounded-md hover:bg-lspi-dark transition-colors">
+                  <Search className="w-4 h-4" />
+                </button>
+              </form>
+            </div>
 
-            {/* 2. Share Widget (BARU DISINI) */}
             <div className="">
               <h3 className="text-lg font-bold text-lspi-dark mb-4 flex items-center gap-2">
                 <Share2 className="w-5 h-5 text-lspi-main" /> Bagikan Artikel
