@@ -237,11 +237,11 @@ const Home = () => {
 
       {/* 3. INSTAGRAM SECTION */}
       <section className="py-20 bg-linear-to-b from-white to-gray-100">
-        <div className="md:flex max-w-full items-center justify-center mx-auto px-4 text-center">
+        <div className="flex flex-col max-w-full items-center justify-center mx-auto px-4 text-center">
           
           {/* Header Section */}
           <motion.div 
-            className="w-full md:w-1/2 mb-10 md:mb-0 md:pr-8"
+            className="w-full md:w-1/2 mb-10 md:pr-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -254,6 +254,26 @@ const Home = () => {
             <p className="text-gray-600 mx-auto">
               Jangan lewatkan update kajian, diskusi, dan kegiatan sosial LSPI melalui laman Instagram kami.
             </p>
+          </motion.div>
+
+          {/* Widget Container */}
+          <motion.div 
+            className="rounded-sm shadow-xl md:max-w-2xl w-full overflow-hidden border border-gray-300"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            // 💡 Delay 0.6s
+            transition={{ duration: 1, delay: 0.6 }}
+          >
+            <InstagramWidget />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            // 💡 Delay 0.8s
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             <a 
               href="https://instagram.com/lspiuinbdg" 
               target="_blank" 
@@ -263,23 +283,6 @@ const Home = () => {
               Lihat Profil Instagram
             </a>
           </motion.div>
-
-          {/* Widget Container */}
-          <motion.div 
-            className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-300"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            // 💡 Delay 0.6s
-            transition={{ duration: 1, delay: 0.6 }}
-          >
-            {/* Menggunakan komponen InstagramEmbed / InstagramWidget */}
-            {/* Pastikan tinggi (h-[...]) cukup untuk menampilkan konten widget */}
-            <div className="md:min-w-md h-96">
-               <InstagramWidget />
-            </div>
-          </motion.div>
-
         </div>
       </section>
 
