@@ -68,6 +68,13 @@ const ArticleDetail = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
+      <title>{article.title} | LSPI</title>
+      <meta name="description" content={article.excerpt} />
+      
+      {/* Open Graph untuk Sosial Media */}
+      <meta property="og:title" content={article.title} />
+      <meta property="og:image" content={article.thumbnail} />
+      <meta property="og:url" content={`https://lspiuinbdg.vercel.app/artikel/${article.slug}`} />
       
       {/* 1. HERO SECTION */}
       <div className="relative bg-lspi-dark text-white py-16 px-4 overflow-hidden">
