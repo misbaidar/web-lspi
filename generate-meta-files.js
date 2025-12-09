@@ -6,31 +6,26 @@ import path from 'path';
 
 // 1. Konfigurasi Firebase
 const firebaseConfig = {
-  apiKey: process.env.VITE_FIREBASE_API_KEY, // 👈 Ganti jadi process.env
+  apiKey: process.env.VITE_FIREBASE_API_KEY,
   projectId: process.env.VITE_FIREBASE_PROJECT_ID,
-  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,
-  storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.VITE_FIREBASE_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // 2. Konfigurasi Path
-const DIST_DIR = './dist'; // Folder hasil build Vite
-const TEMPLATE_PATH = './dist/index.html'; // Template HTML utama
+const DIST_DIR = './dist'; 
+const BASE_URL = 'https://lspiuinbdg.vercel.app'; // Ganti dengan domain asli Anda
+const TEMPLATE_PATH = './dist/index.html';
 
 async function generateMetaFiles() {
-  console.log('🚀 Starting Static Meta File Generation...');
+  console.log('🚀 Starting Static Meta File & Image Generation...');
 
-  // Pastikan folder dist ada (artinya build sudah dijalankan)
   if (!fs.existsSync(DIST_DIR)) {
     console.error('❌ Error: Folder "dist" not found. Run "npm run build" first.');
     process.exit(1);
   }
 
-  // Baca template HTML asli
   let templateHtml = fs.readFileSync(TEMPLATE_PATH, 'utf-8');
 
   console.log('📥 Fetching articles from Firestore...');
@@ -42,35 +37,61 @@ async function generateMetaFiles() {
   console.log(`📝 Processing ${articles.length} articles...`);
 
   for (const article of articles) {
-    // 3. Buat Folder untuk setiap artikel
-    // Struktur: dist/artikel/{slug}/index.html
     const articleDir = path.join(DIST_DIR, 'artikel', article.slug);
     
+    // Buat folder artikel jika belum ada
     if (!fs.existsSync(articleDir)){
         fs.mkdirSync(articleDir, { recursive: true });
     }
 
-    // 4. Suntikkan Metadata ke dalam HTML
+    // --- LOGIC BARU: CONVERT BASE64 KE FILE ---
+    let imageUrl = `${BASE_URL}/social-card.jpg`; // Default jika tidak ada thumbnail
+
+    if (article.thumbnail && article.thumbnail.startsWith('data:image')) {
+      try {
+        // 1. Ambil data Base64 (buang prefix "data:image/jpeg;base64,")
+        const matches = article.thumbnail.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+        
+        if (matches && matches.length === 3) {
+          const buffer = Buffer.from(matches[2], 'base64');
+          const imageFilename = 'thumbnail.jpg';
+          const imagePath = path.join(articleDir, imageFilename);
+
+          // 2. Tulis file gambar fisik ke folder dist/artikel/{slug}/thumbnail.jpg
+          fs.writeFileSync(imagePath, buffer);
+          
+          // 3. Set URL publik untuk meta tag
+          imageUrl = `${BASE_URL}/artikel/${article.slug}/${imageFilename}`;
+          console.log(`   🖼️  Generated image for: ${article.slug}`);
+        }
+      } catch (err) {
+        console.error(`   ⚠️ Failed to convert image for ${article.slug}:`, err);
+      }
+    } else if (article.thumbnail && article.thumbnail.startsWith('http')) {
+      // Jika thumbnail sudah berupa URL (misal dari link eksternal), pakai langsung
+      imageUrl = article.thumbnail;
+    }
+
+    // --- SUNTIKKAN METADATA (Sekarang pakai imageUrl yang valid) ---
     let finalHtml = templateHtml
-      // Ganti Title
       .replace(/<title>.*?<\/title>/, `<title>${article.title} | LSPI</title>`)
-      // Ganti Meta Description
       .replace(/<meta name="description" content=".*?"/, `<meta name="description" content="${article.excerpt}"`)
-      // Ganti Open Graph (Facebook/WhatsApp)
+      
+      // Open Graph
       .replace(/<meta property="og:title" content=".*?"/, `<meta property="og:title" content="${article.title}"`)
       .replace(/<meta property="og:description" content=".*?"/, `<meta property="og:description" content="${article.excerpt}"`)
-      .replace(/<meta property="og:image" content=".*?"/, `<meta property="og:image" content="${article.thumbnail}"`)
-      .replace(/<meta property="og:url" content=".*?"/, `<meta property="og:url" content="https://lspiuinsgd.vercel.app/artikel/${article.slug}"`)
-      // Ganti Twitter Card
+      .replace(/<meta property="og:image" content=".*?"/, `<meta property="og:image" content="${imageUrl}"`) // 👈 URL valid
+      .replace(/<meta property="og:url" content=".*?"/, `<meta property="og:url" content="${BASE_URL}/artikel/${article.slug}"`)
+      
+      // Twitter
       .replace(/<meta property="twitter:title" content=".*?"/, `<meta property="twitter:title" content="${article.title}"`)
       .replace(/<meta property="twitter:description" content=".*?"/, `<meta property="twitter:description" content="${article.excerpt}"`)
-      .replace(/<meta property="twitter:image" content=".*?"/, `<meta property="twitter:image" content="${article.thumbnail}"`);
+      .replace(/<meta property="twitter:image" content=".*?"/, `<meta property="twitter:image" content="${imageUrl}"`); // 👈 URL valid
 
-    // 5. Simpan file index.html baru
     fs.writeFileSync(path.join(articleDir, 'index.html'), finalHtml);
   }
 
-  console.log('✅ Success! Static meta files generated.');
+  console.log('✅ Success! Static files & images generated.');
   process.exit();
 }
 
