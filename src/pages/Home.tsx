@@ -46,11 +46,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <title>LSPI | Lembaga Studi Politik Islam</title>
-      <meta name="description" content="Wadah intelektual dan pergerakan politik Islam muda." />
-      <meta property="og:title" content="Lembaga Studi Politik Islam" />
-      <meta property="og:description" content="Wadah intelektual dan pergerakan politik Islam muda." />
-      <meta property="og:image" content="https://lspiuinbdg.vercel.app/banner.svg" />
       
       {/* 1. HERO SECTION */}
       <HeroSection />
