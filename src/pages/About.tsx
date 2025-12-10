@@ -11,8 +11,6 @@ const About = () => {
     >
       <h1 className="text-3xl font-bold mb-6 text-green-800">Tentang Lembaga Studi Politik Islam (LSPI)</h1>
       <div className="space-y-4 text-gray-700">
-        <p>Placeholder untuk Visi, Misi, Sejarah Singkat, dan Struktur Organisasi LSPI.</p>
-        <p>LSPI berfokus pada kajian isu-isu politik kontemporer dengan perspektif Islam. Kami adalah organisasi mahasiswa yang aktif berdiskusi dan beropini.</p>
       </div>
     </motion.div>
   );
