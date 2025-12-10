@@ -131,8 +131,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Divider Pemisah */}
-      <IslamicDivider /> {/* Putar 180 derajat untuk variasi pola */}
 
       <section className="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
         <motion.div 
@@ -228,10 +226,9 @@ const Home = () => {
         )}
       </section>
 
-      <IslamicDivider />
 
       {/* 3. INSTAGRAM SECTION */}
-      <section className="py-20 bg-linear-to-b from-white to-gray-100">
+      <section className="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col max-w-full items-center justify-center mx-auto px-4 text-center">
           
           {/* Header Section */}
