@@ -178,15 +178,15 @@ const Home = () => {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     onError={(e) => (e.currentTarget.src = "https://via.placeholder.com/600x400?text=No+Image")}
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-lspi-main text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                      {article.category}
-                    </span>
-                  </div>
                 </div>
 
                 {/* Content */}
                 <div className="p-6 flex flex-col grow">
+                  <div className="mb-3">
+                    <span className="bg-lspi-main text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                      {article.category}
+                    </span>
+                  </div>
                   {/* Meta */}
                   <div className="flex items-center text-xs text-gray-500 mb-3 space-x-4">
                     <div className="flex items-center">

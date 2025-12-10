@@ -6,6 +6,7 @@
 
 /* 2. TAILWIND INITIALIZATION */
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* 3. THEME CONFIGURATION (Tailwind v4) */
 @theme {
@@ -85,15 +86,4 @@
   ::-webkit-scrollbar-thumb {
     @apply bg-lspi-main/60 rounded-full hover:bg-lspi-main transition-colors;
   }
-}
-
-/* Force bullet points and numbers to show */
-.wmde-markdown ul {
-  list-style-type: disc !important;
-  @apply my-4;
-}
-
-.wmde-markdown ol {
-  list-style-type: decimal !important;
-  @apply my-4;
 }

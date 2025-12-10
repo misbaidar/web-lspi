@@ -7,7 +7,7 @@ import { id as indonesia } from 'date-fns/locale';
 import { 
   Calendar, User, ArrowLeft, Tag, Share2, Search, Link as LinkIcon, 
   Facebook, Phone, 
-  Loader2
+  Loader2, ArrowUp
 } from 'lucide-react';
 
 import { getArticleBySlug, getRecentArticles } from '../services/articleService';
@@ -23,6 +23,8 @@ const ArticleDetail = () => {
   const [recentArticles, setRecentArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [keyword, setKeyword] = useState("");
+  // show/hide "scroll to top" button
+  const [showTopBtn, setShowTopBtn] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +43,14 @@ const ArticleDetail = () => {
     fetchData();
   }, [slug]);
 
+  useEffect(() => {
+    const onScroll = () => setShowTopBtn(window.scrollY > 300);
+    window.addEventListener('scroll', onScroll);
+    // set initial visibility (in case page is loaded scrolled)
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (keyword.trim()) {
@@ -51,6 +61,10 @@ const ArticleDetail = () => {
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
     alert("Link artikel berhasil disalin!");
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const shareUrl = window.location.href;
@@ -135,15 +149,14 @@ const ArticleDetail = () => {
             )}
 
             {/* Markdown Content */}
-            <div className="prose prose-lg max-w-none prose-headings:text-lspi-dark prose-a:text-lspi-main prose-img:rounded-xl">
+            <div className="prose prose-lg max-w-none prose-a:text-lspi-main prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-md">
               <div data-color-mode="light">
                 <MDEditor.Markdown 
                   source={article.content} 
                   style={{ 
                     backgroundColor: 'transparent', 
-                    color: '#374151', 
                     lineHeight: '1.8',
-                    fontFamily: 'inherit' 
+                    fontFamily: 'inherit',
                   }} 
                 />
               </div>
@@ -255,7 +268,18 @@ const ArticleDetail = () => {
 
         </div>
       </div>
-      
+
+      {/* Scroll to Top Button (floating) */}
+      {showTopBtn && (
+        <button
+          onClick={scrollToTop}
+          aria-label="Scroll to top"
+          className="fixed right-4 bottom-4 md:right-8 md:bottom-8 z-50 p-3 rounded-full bg-lspi-main text-white shadow-lg hover:bg-lspi-dark transition-colors"
+          title="Ke Atas"
+        >
+          <ArrowUp className="w-5 h-5" />
+        </button>
+      )}
     </div>
   );
 };
