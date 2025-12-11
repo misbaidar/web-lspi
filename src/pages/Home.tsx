@@ -250,7 +250,7 @@ const Home = () => {
 
           {/* Widget Container */}
           <motion.div 
-            className="rounded-sm shadow-xl md:min-w-2xl w-sm overflow-hidden border border-gray-300"
+            className="rounded-sm shadow-xl md:min-w-2xl w-full overflow-hidden border border-gray-300"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
