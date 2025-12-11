@@ -141,13 +141,6 @@ const Navbar = () => {
                   </NavLink>
                 );
               })}
-              
-              <NavLink 
-                to="/gabung" 
-                className="bg-lspi-light-accent text-lspi-main py-2 px-4 rounded-full font-semibold text-base hover:bg-white transition duration-200 shadow-md"
-              >
-                  Bergabung
-              </NavLink>
             </div>
 
             {/* Tombol Hamburger Mobile */}
@@ -216,9 +209,6 @@ const Navbar = () => {
                   </NavLink>
                 );
               })}
-              <NavLink to="/gabung" onClick={() => setIsOpen(false)} className="block mx-4 mt-3 py-2 text-center text-base font-semibold bg-lspi-light-accent text-lspi-main hover:bg-white rounded-md transition duration-200">
-                    Bergabung
-              </NavLink>
             </motion.div>
           )}
         </AnimatePresence>
