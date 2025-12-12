@@ -23,6 +23,7 @@ const navItems: NavItem[] = [
   }, 
   { name: 'Artikel', path: '/artikel' },
   { name: 'Tentang', path: '/tentang' },
+  { name: 'Kontak', path: '/kontak' },
 ];
 
 const menuVariants = {

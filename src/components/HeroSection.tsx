@@ -49,7 +49,7 @@ const HeroSection = () => {
           variants={textVariants}
           transition={{ type: 'tween', ease: 'easeInOut', duration: 0.5 }}
         >
-          Wadah intelektual mahasiswa UIN SGD Bandung yang berfokus pada kajian isu-isu politik kontemporer dari perspektif Islam. Mencetak kader yang responsif dan kritis.
+          Adalah lembaga yang mengkaji tentang politik islam dan manyebarluaskannya dalam bentuk dakwah.
         </motion.p>
         
         {/* Tombol Selengkapnya */}
