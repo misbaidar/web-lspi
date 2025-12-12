@@ -66,7 +66,7 @@ const Footer = () => {
             <li><NavLink to="/kegiatan/mata-muda" className="hover:text-white transition-colors">Mata Muda</NavLink></li>
             <li><NavLink to="/artikel" className="hover:text-white transition-colors">Artikel</NavLink></li>
             <li><NavLink to="/tentang" className="hover:text-white transition-colors">Tentang Kami</NavLink></li>
-            <li><NavLink to="/gabung" className="hover:text-white transition-colors">Bergabung</NavLink></li>
+            <li><NavLink to="/kontak" className="hover:text-white transition-colors">Kontak</NavLink></li>
           </ul>
         </div>
 

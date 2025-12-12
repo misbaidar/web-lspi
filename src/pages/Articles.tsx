@@ -46,7 +46,7 @@ const Articles = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20"> {/* pt-20 untuk kompensasi Navbar Fixed */}
+    <div className="min-h-screen bg-gray-50 pt-(--navbar-height)"> {/* pt-20 untuk kompensasi Navbar Fixed */}
       
       {/* Header Page */}
       <div className="bg-lspi-main text-white py-16 px-4 relative overflow-hidden">

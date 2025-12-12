@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Articles from './pages/Articles';
 import ArticleDetail from './pages/ArticleDetail';
 import About from './pages/About';
+import Kontak from './pages/Kontak';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -19,7 +20,7 @@ function App() {
             <Route path="/artikel" element={<Articles />} />
             <Route path="/artikel/:slug" element={<ArticleDetail />} />
             <Route path="/tentang" element={<About />} />
-            <Route path="/gabung" element={<div>Halaman Gabung/Contact</div>} />
+            <Route path="/kontak" element={<Kontak />} />
             <Route path="*" element={<div>404 Halaman Tidak Ditemukan</div>} />
           </Routes>
         </main>

@@ -29,7 +29,7 @@
   --brand-accent: #C0D9E0;
 
   /* Jarak aman untuk Navbar Sticky (bisa dipakai di calc() padding-top halaman) */
-  --navbar-height: 7rem;
+  --navbar-height: 5rem;
 }
 
 /* 5. BASE LAYER STYLES */

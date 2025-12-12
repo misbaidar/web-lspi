@@ -68,7 +68,7 @@ const Home = () => {
         >
           <h2 className="text-3xl md:text-5xl font-extrabold text-lspi-dark leading-tight">
             "Peduli Politik, <br className="hidden md:block" />
-            <span className="text-lspi-main">Peduli Kaum Muslim"</span>
+            <span>Peduli Kaum Muslim"</span>
           </h2>
         </motion.div>
 
