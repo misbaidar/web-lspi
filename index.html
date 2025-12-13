@@ -1,32 +1,68 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lembaga kajian dan dakwah politik islam mahasiswa UIN Sunan Gunung Djati Bandung. Peduli Politik, Peduli Kaum Muslim." />
+    <meta name="keywords" content="LSPI, Lembaga Studi Politik Islam, UIN Bandung, Politik Islam, Kajian Politik, Dakwah" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1a3d3a" />
+    <meta name="author" content="LSPI UIN Bandung" />
+    
     <link rel="apple-touch-icon" sizes="180x180" href="src/assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="src/assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="src/assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="src/assets/favicon/site.webmanifest">
+    <link rel="canonical" href="https://lspiuinbdg.vercel.app/" />
     <link href="/src/index.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <title>LSPI - Lembaga Studi Politik Islam</title>
-    <meta name="description" content="Lembaga kajian dan dakwah politik islam." />
+    <title>LSPI - Lembaga Studi Politik Islam | UIN Bandung</title>
+    
+    {/* Open Graph / Facebook */}
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="LSPI - Lembaga Studi Politik Islam" />
-    <meta property="og:description" content="Lembaga kajian dan dakwah politik islam." />
+    <meta property="og:description" content="Lembaga kajian dan dakwah politik islam mahasiswa UIN Sunan Gunung Djati Bandung. Peduli Politik, Peduli Kaum Muslim." />
     <meta property="og:image" content="https://lspiuinbdg.vercel.app/banner.png" />
     <meta property="og:url" content="https://lspiuinbdg.vercel.app/" />
+    <meta property="og:site_name" content="LSPI" />
 
+    {/* Twitter */}
+    <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content="LSPI - Lembaga Studi Politik Islam" />
-    <meta property="twitter:description" content="Lembaga kajian dan dakwah politik islam." />
+    <meta property="twitter:description" content="Lembaga kajian dan dakwah politik islam mahasiswa UIN Sunan Gunung Djati Bandung." />
     <meta property="twitter:image" content="https://lspiuinbdg.vercel.app/banner.png" />
-    <meta property="og:site_name" content="LSPI">
+
+    {/* Structured Data - Organization */}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "LSPI",
+      "alternateName": "Lembaga Studi Politik Islam",
+      "url": "https://lspiuinbdg.vercel.app/",
+      "logo": "https://lspiuinbdg.vercel.app/banner.png",
+      "description": "Lembaga kajian dan dakwah politik islam mahasiswa UIN Sunan Gunung Djati Bandung",
+      "sameAs": [
+        "https://instagram.com/lspiuinbdg"
+      ]
+    }
+    </script>
+
+    {/* Structured Data - Website */}
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "LSPI",
-      "alternateName": ["Lembaga Studi Politik Islam", "LSPI UIN Bandung"],
-      "url": "https://lspiuinbdg.vercel.app/"
+      "url": "https://lspiuinbdg.vercel.app/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://lspiuinbdg.vercel.app/artikel?search={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
   </head>
