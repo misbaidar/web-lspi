@@ -56,6 +56,17 @@ const Articles = () => {
   const endIndex = startIndex + articlesPerPage;
   const paginatedArticles = filteredArticles.slice(startIndex, endIndex);
 
+  // Build compact pages list: always include first, last and current +/- 1
+  const pagesSet = new Set<number>();
+  if (totalPages >= 1) {
+    pagesSet.add(1);
+    pagesSet.add(totalPages);
+    for (let p = currentPage - 1; p <= currentPage + 1; p++) {
+      if (p > 1 && p < totalPages) pagesSet.add(p);
+    }
+  }
+  const pagesToShow = Array.from(pagesSet).sort((a, b) => a - b);
+
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -171,33 +182,34 @@ const Articles = () => {
               <div className="flex items-center justify-center gap-3 mt-12">
                 {/* Page Numbers with Ellipsis */}
                 <div className="flex items-center gap-2">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-                    // Show first page, last page, current page, and neighbors
-                    const showPage = page === 1 || page === totalPages || (page >= currentPage - 1 && page <= currentPage + 1);
-                    const showEllipsisBefore = page === currentPage - 2 && currentPage > 3;
-                    
-                    if (!showPage && !showEllipsisBefore) return null;
-
-                    if (showEllipsisBefore) {
-                      return <span key={`ellipsis-${page}`} className="text-gray-400 px-1">...</span>;
-                    }
-
-                    return (
-                      <button
-                        key={page}
-                        onClick={() => handlePageChange(page)}
-                        className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                          currentPage === page
-                            ? 'bg-lspi-main text-white shadow-md'
-                            : 'bg-white text-gray-600 border border-gray-300 hover:bg-gray-50 hover:border-lspi-main'
-                        }`}
-                        aria-label={`Go to page ${page}`}
-                        aria-current={currentPage === page ? 'page' : undefined}
-                      >
-                        {page}
-                      </button>
-                    );
-                  })}
+                  {(() => {
+                    let prev: number | null = null;
+                    return pagesToShow.map((page) => {
+                      const elements: React.ReactNode[] = [];
+                      if (prev !== null && page - prev > 1) {
+                        elements.push(
+                          <span key={`ellipsis-${prev}-${page}`} className="text-gray-400 px-2">...</span>
+                        );
+                      }
+                      elements.push(
+                        <button
+                          key={page}
+                          onClick={() => handlePageChange(page)}
+                          className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                            currentPage === page
+                              ? 'bg-lspi-main text-white shadow-md'
+                              : 'bg-white text-gray-600 border border-gray-300 hover:bg-gray-50 hover:border-lspi-main'
+                          }`}
+                          aria-label={`Go to page ${page}`}
+                          aria-current={currentPage === page ? 'page' : undefined}
+                        >
+                          {page}
+                        </button>
+                      );
+                      prev = page;
+                      return elements;
+                    });
+                  })()}
                 </div>
               </div>
             )}
