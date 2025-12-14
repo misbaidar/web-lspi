@@ -49,7 +49,7 @@ const HeroSection = () => {
           variants={textVariants}
           transition={{ type: 'tween', ease: 'easeInOut', duration: 0.5 }}
         >
-          Adalah lembaga mahasiswa UIN Sunan Gunung Djati Bandung yang mengkaji tentang politik islam dan manyebarluaskannya dalam bentuk dakwah.
+          LSPI Adalah lembaga mahasiswa UIN Sunan Gunung Djati Bandung yang mengkaji tentang politik islam dan manyebarluaskannya dalam bentuk dakwah.
         </motion.p>
         
         {/* Tombol Selengkapnya */}
