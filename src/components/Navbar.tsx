@@ -34,11 +34,12 @@ const menuVariants = {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false); // State untuk dropdown desktop
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const isArticlePage = location.pathname.startsWith('/artikel/');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,7 +55,7 @@ const Navbar = () => {
   const transitionClasses = 'transition-all duration-300 ease-in-out';
 
   return (
-    <div className="sticky z-50 top-0"> 
+    <div className={`${!isArticlePage ? 'sticky' : 'relative'} z-50 top-0`}> 
       <nav className="absolute w-full top-0 z-50 group">
         <div 
           className={`

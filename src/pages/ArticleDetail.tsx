@@ -166,7 +166,7 @@ const ArticleDetail = () => {
 
           {/* --- KOLOM KANAN: SIDEBAR (STICKY) --- */}
           {/* Tambahkan 'lg:sticky lg:top-24' dan 'h-fit' agar sidebar diam saat scroll */}
-          <aside className="lg:col-span-4 space-y-8 lg:sticky lg:top-24 h-fit">
+          <aside className="lg:col-span-4 space-y-8 lg:sticky lg:top-8 h-fit">
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
               <h3 className="text-lg font-bold text-lspi-dark mb-6 border-l-4 border-lspi-main pl-3">
                 Artikel Terbaru
