@@ -50,7 +50,7 @@ const Navbar = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [isHomePage]);
+  }, [isHomePage, location.pathname]);
 
   const transitionClasses = 'transition-all duration-300 ease-in-out';
 
