@@ -19,7 +19,7 @@ const db = getFirestore(app);
 
 // 2. Konfigurasi Path
 const DIST_DIR = './dist'; 
-const BASE_URL = 'https://lspiuinbdg.vercel.app'; // Ganti dengan domain asli Anda
+const BASE_URL = 'https://www.lspiuinbdg.com'; // Ganti dengan domain asli Anda
 const TEMPLATE_PATH = './dist/index.html';
 
 async function generateMetaFiles() {
