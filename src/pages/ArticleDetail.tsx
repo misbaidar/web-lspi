@@ -14,6 +14,7 @@ import { getArticleBySlug, getRecentArticles } from '../services/articleService'
 import type { Article } from '../types';
 import IslamicDivider from '../components/IslamicDivider';
 import XTwitterIcon from '../components/XTwitterIcon';
+import CommentSection from '../components/CommentSection';
 
 const ArticleDetail = () => {
   const { slug } = useParams();
@@ -161,6 +162,7 @@ const ArticleDetail = () => {
                 />
               </div>
             </div>
+            <CommentSection articleId={article.id} />
           </div>
 
 

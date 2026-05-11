@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Info, History, Target, ChevronRight, Eye } from 'lucide-react';
+import { Info, History, Target, ChevronRight, Eye, ChevronLeft } from 'lucide-react';
+import OrganizationStructure from '../components/OrganizationStructure';
 
 // Definisi Data Konten Tab
 const tabData = [
@@ -82,6 +83,15 @@ const tabData = [
 
 const About = () => {
   const [activeTab, setActiveTab] = useState(tabData[0].id);
+  const tabScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollTabs = (direction: 'left' | 'right') => {
+    if (tabScrollRef.current) {
+      const scrollAmount = 200;
+      const newScrollLeft = tabScrollRef.current.scrollLeft + (direction === 'left' ? -scrollAmount : scrollAmount);
+      tabScrollRef.current.scrollTo({ left: newScrollLeft, behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
@@ -98,9 +108,61 @@ const About = () => {
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
             <div className="flex flex-col md:flex-row h-full">
               
-              {/* SIDEBAR TABS (Kiri) */}
+              {/* MOBILE TAB NAVIGATION ARROWS */}
+              <div className="md:hidden flex items-center justify-between bg-lspi-main p-2 gap-2">
+                <button
+                  onClick={() => scrollTabs('left')}
+                  className="p-2 hover:bg-white/20 rounded-lg transition-colors shrink-0"
+                  aria-label="Scroll tabs left"
+                >
+                  <ChevronLeft className="w-5 h-5 text-white" />
+                </button>
+                
+                {/* SIDEBAR TABS (Kiri) - Mobile Horizontal */}
+                <div 
+                  ref={tabScrollRef}
+                  className="flex-1 flex flex-row gap-2 overflow-x-hidden"
+                  style={{
+                    backgroundImage: 'url(https://www.transparenttextures.com/patterns/arabesque.png)',
+                    backgroundBlendMode: 'overlay',
+                    scrollBehavior: 'smooth'
+                  }}
+                >
+                  {tabData.map((tab) => {
+                    const isActive = activeTab === tab.id;
+                    const Icon = tab.icon;
+                    
+                    return (
+                      <button
+                        key={tab.id}
+                        onClick={() => setActiveTab(tab.id)}
+                        className={`
+                          flex items-center gap-2 px-3 py-2 rounded-xl transition-all text-left whitespace-nowrap shrink-0
+                          ${isActive 
+                            ? 'bg-white text-lspi-main shadow-md ring-1 ring-lspi-main font-semibold' 
+                            : 'text-white/70 hover:bg-white/10 hover:text-white'
+                          }
+                        `}
+                      >
+                        <Icon className={`w-4 h-4 ${isActive ? 'text-lspi-main' : 'text-white/70'}`} />
+                        <span className="text-xs">{tab.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <button
+                  onClick={() => scrollTabs('right')}
+                  className="p-2 hover:bg-white/20 rounded-lg transition-colors shrink-0"
+                  aria-label="Scroll tabs right"
+                >
+                  <ChevronRight className="w-5 h-5 text-white" />
+                </button>
+              </div>
+
+              {/* SIDEBAR TABS (Desktop) */}
               <div 
-                className="w-full md:w-3/12 bg-lspi-main p-2 md:p-4 flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible"
+                className="hidden md:flex w-3/12 bg-lspi-main p-4 flex-col gap-2 md:overflow-visible"
                 style={{
                   backgroundImage: 'url(https://www.transparenttextures.com/patterns/arabesque.png)',
                   backgroundBlendMode: 'overlay'
@@ -115,7 +177,7 @@ const About = () => {
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
                       className={`
-                        flex items-center gap-3 px-4 py-3 rounded-xl transition-all w-full text-left whitespace-nowrap md:whitespace-normal
+                        flex items-center gap-3 px-4 py-3 rounded-xl transition-all w-full text-left whitespace-normal
                         ${isActive 
                           ? 'bg-white text-lspi-main shadow-md ring-1 ring-lspi-main font-semibold' 
                           : 'text-white/70 hover:bg-white/10 hover:text-white'
@@ -124,7 +186,7 @@ const About = () => {
                     >
                       <Icon className={`w-5 h-5 ${isActive ? 'text-lspi-main' : 'text-white/70'}`} />
                       <span className="flex-1">{tab.label}</span>
-                      {isActive && <ChevronRight className="w-4 h-4 hidden md:block text-lspi-main" />}
+                      {isActive && <ChevronRight className="w-4 h-4 text-lspi-main" />}
                     </button>
                   );
                 })}
@@ -164,6 +226,11 @@ const About = () => {
             </div>
           </div>
 
+        </div>
+
+        {/* Organization Structure Section */}
+        <div className="mt-20 pt-16 border-t border-gray-200">
+          <OrganizationStructure />
         </div>
       </div>
     </>
